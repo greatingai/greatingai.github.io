@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>产业计算器</title>
+    <meta name="renderer" content="webkit">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <link href="layui/css/layui.css" rel="stylesheet" />
+    <link href="step-lay/step.css" rel="stylesheet">
+</head>
+<body>
+    <div class="layui-fluid">
+        <div class="layui-card">
+            <div class="layui-card-body" style="padding-top: 40px;">
+                <div class="layui-carousel" id="stepForm" lay-filter="stepForm" style="margin: 0 auto;">
+                    <div carousel-item>
+                        <div>
+                            <form class="layui-form" style="margin: 0 auto;max-width: 460px;padding-top: 40px;">
+                                <div class="layui-form-item">
+                                    <label class="layui-form-label">产品类型:</label>
+                                    <div class="layui-input-block">
+                                        <select lay-verify="required" id="gsd">
+                                            <option value="牛肉" selected>牛肉</option>
+                                            <option value="山羊肉">山羊肉</option>
+                                            <option value="坚果">坚果</option>
+                                            <option value="浆果">浆果</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="layui-form-item">
+                                    <label class="layui-form-label">原材料价格:</label>
+                                    <div class="layui-input-block">
+                                        <input type="text" id="cbd" placeholder="请填写原材料价格" value="" class="layui-input" lay-verify="number" required />
+                                    </div>
+                                </div>
+                                <div class="layui-form-item">
+                                    <label class="layui-form-label">加工增值:</label>
+                                    <div class="layui-input-block">
+                                        <select lay-verify="required" id="jgbl">
+                                            <option value="0.3" selected>30%</option>
+                                            <option value="0.4">40%</option>
+                                            <option value="0.5">50%</option>
+                                            <option value="0.6">60%</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="layui-form-item">
+                                    <label class="layui-form-label">生产成本系数:</label>
+                                    <div class="layui-input-block">
+                                        <select lay-verify="required" id="xishu">
+                                            <option value="0.1" selected>0.1</option>
+                                            <option value="0.2">0.2</option>
+                                            <option value="0.3">0.3</option>
+                                            <option value="0.4">0.4</option>
+                                        </select>
+                                        * 生产环节成本占原材料成本的比值
+                                    </div>
+                                    
+                                </div>
+                                <div class="layui-form-item">
+                                    <div class="layui-input-block">
+                                        <button class="layui-btn" lay-submit lay-filter="formStep" onclick="suan()">
+                                            &emsp;下一步&emsp;
+                                        </button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        <div>
+                            <form class="layui-form" style="margin: 0 auto;max-width: 460px;padding-top: 30px;">
+                                <div class="layui-form-item">
+                                    <label class="layui-form-label">产品类型:</label>
+                                    <div class="layui-input-block">
+                                        <div class="layui-form-mid layui-word-aux" id="cplx"></div>
+                                    </div>
+                                </div>
+                                <div class="layui-form-item">
+                                    <label class="layui-form-label">关税:</label>
+                                    <div class="layui-input-block">
+                                        <div class="layui-form-mid layui-word-aux">
+                                            <span style="font-size: 18px;color: #333;" id="gsxx"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="layui-form-item">
+                                    <label class="layui-form-label">内地利润:</label>
+                                    <div class="layui-input-block">
+                                        <div class="layui-form-mid layui-word-aux"  id="ndlr"></div>
+                                    </div>
+                                </div>
+                                <div class="layui-form-item">
+                                    <label class="layui-form-label">内地利润率:</label>
+                                    <div class="layui-input-block">
+                                        <div class="layui-form-mid layui-word-aux" id="ndlrl"></div>
+                                    </div>
+                                </div>
+                                <div class="layui-form-item">
+                                    <label class="layui-form-label">海南利润:</label>
+                                    <div class="layui-input-block">
+                                        <div class="layui-form-mid layui-word-aux" id="hnlr"></div>
+                                    </div>
+                                </div>
+                                <div class="layui-form-item">
+                                    <label class="layui-form-label">海南利润率:</label>
+                                    <div class="layui-input-block">
+                                        <div class="layui-form-mid layui-word-aux" id="hnlrl"></div>
+                                    </div>
+                                </div>
+                                <div class="layui-form-item">
+                                    <label class="layui-form-label">成本分析:</label>
+                                    <div class="layui-input-block">
+                                        <div class="layui-form-mid layui-word-aux">原料成本<span id="x1"></span>元；生产成本<span id="x2"></span>元；内地增值税<span id="x3"></span>元；海南增值税<span id="x4"></span>元；海南运费增加<span id="x5"></span>元</div>
+                                    </div>
+                                </div>
+                                <div class="layui-form-item">
+                                    <div class="layui-input-block" style="width: 300px;">
+                                        <button type="button" class="layui-btn layui-btn-primary pre">上一步</button>
+                                        <button class="layui-btn" lay-submit lay-filter="formStep2">
+                                            &emsp;对比分析&emsp;
+                                        </button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        <div>
+                            <div style="text-align: center;margin-top: 90px;">
+                                <i class="layui-icon layui-circle"
+                                   style="color: white;font-size:30px;font-weight:bold;background: #52C41A;padding: 20px;line-height: 80px;">&#xe605;</i>
+                                <div style="font-size: 14px;color: #666;font-weight: 500;margin-top: 30px;">
+                                    海南生产对比内地
+                                </div>
+                                <div style="font-size: 24px;color: #333;margin-top: 26px;">利润率从<span id="x6"></span>增长至<span id="x7"></span>，增长<span id="x8"></span>倍</div>
+                            </div>
+                            <div style="text-align: center;margin-top: 50px;">
+                                <button class="layui-btn layui-btn-primary"lay-submit lay-filter="formStep2">再次计算</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="layui/layui.js"></script>
+    <script src="step-lay/step.js"></script>
+    <script>
+
+        layui.config({
+            base: 'step-lay/'
+        }).use(['form', 'step'], function () {
+            var $ = layui.$
+                , form = layui.form
+                , step = layui.step;
+
+            step.render({
+                elem: '#stepForm',
+                filter: 'stepForm',
+                width: '100%', //设置容器宽度
+                stepWidth: '750px',
+                height: '500px',
+                stepItems: [{
+                    title: '填写试算信息'
+                }, {
+                    title: '确认试算信息'
+                }, {
+                    title: '完成'
+                }]
+            });
+
+
+            form.on('submit(formStep)', function (data) {
+                step.next('#stepForm');
+                return false;
+            });
+
+            form.on('submit(formStep2)', function (data) {
+                step.next('#stepForm');
+                return false;
+            });
+
+            $('.pre').click(function () {
+                step.pre('#stepForm');
+            });
+
+            $('.next').click(function () {
+                step.next('#stepForm');
+            });
+        })
+    </script>
+      <script>
+        function suan(){
+            var gs=document.getElementById("gsd").value;
+            var guanshui;
+            if( gs== "牛肉" ){guanshui = 0.12
+            }else if(gs== "山羊肉" ){guanshui=0.2
+          }else if(gs== "坚果" ){guanshui=0.24
+      }else if(gs== "浆果" ){guanshui=0.2}
+      var cb=Math.floor(document.getElementById("cbd").value * 100)/100;
+      var xs=Math.floor(document.getElementById("xishu").value*100)/100;
+      var jgong = Math.floor(document.getElementById("jgbl").value*100)/100;
+      var sj= cb*jgong+cb;
+
+      var jgs = Math.floor(cb*100)*Math.floor(guanshui*100)/10000
+      var zzsnd = Math.floor((sj-cb-jgs)*9)/100
+      var zzshn = Math.floor((sj-cb)*9)/100
+      var yf = Math.floor(cb*3)/100
+      var sccb = Math.floor(cb*100)*Math.floor(xs*100)/10000
+      var zcbnd = sccb+cb+jgs+zzsnd
+      var zcbhn = sccb+cb+yf+zzshn
+      var lrnd = Math.floor((sj-zcbnd)*100)/100
+      var lrhn = Math.floor((sj-zcbhn)*100)/100
+      var lrlnd = 100*lrnd/zcbnd
+      var lrlhn = 100*lrhn/zcbhn
+      lrlnd = lrlnd.toFixed(2)
+      lrlhn = lrlhn.toFixed(2)
+      var db = Math.abs(lrlhn)/Math.abs(lrlnd) - 1
+      db= db.toFixed(2)
+          document.getElementById("cplx").innerHTML = document.getElementById("gsd").value;
+          document.getElementById("gsxx").innerHTML = jgs+" 元";
+          document.getElementById("ndlr").innerHTML = lrnd+" 元";
+          document.getElementById("ndlrl").innerHTML = lrlnd+" %";
+          document.getElementById("hnlr").innerHTML = lrhn+" 元";
+          document.getElementById("hnlrl").innerHTML = lrlhn+" %";
+          document.getElementById("x1").innerHTML = cb;
+          document.getElementById("x2").innerHTML = sccb;
+          document.getElementById("x3").innerHTML = zzsnd;
+          document.getElementById("x4").innerHTML = zzshn;
+          document.getElementById("x5").innerHTML = yf;
+        
+          document.getElementById("x6").innerHTML = lrlnd+" %";
+          document.getElementById("x7").innerHTML = lrlhn+" %";
+          document.getElementById("x8").innerHTML = db;}
+      </script>
+</body>
+</html>
