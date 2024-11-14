@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<link rel="stylesheet" href="css/index.css"/>
+		<script src="js/jquery-2.2.4.js"></script>
+	</head>
+	<body>
+		<div class="form-box">
+			<div class="shisuan">
+				<div class="tianxie">
+					<span>1</span>
+					<p>填写试算信息</p>
+				</div>
+				<div class="line"></div>
+				<div class="jieguo">
+					<span class="mark">2</span>
+					<p>查看试算结果</p>
+				</div>
+			</div>
+			<div class="qysd">
+				<div>企业所得</div>
+				<table class="enterprise-table">
+					<thead>
+						<tr>
+							<th>项目</th>
+							<th>内地生产</th>
+							<th>海口生产</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td class="firstColumn">原材料成本</td>
+							<td></td>
+							<td></td>
+						</tr>
+						<tr>
+							<td class="firstColumn">进口关税</td>
+							<td></td>
+							<td></td>
+						</tr>
+						<tr>
+							<td class="firstColumn">进口增值税</td>
+							<td></td>
+							<td></td>
+						</tr>
+						<!-- <tr>
+							<td class="firstColumn">流转增值税</td>
+							<td></td>
+							<td></td>
+						</tr> -->
+						<tr>
+							<td class="firstColumn">生产成本（预估）</td>
+							<td></td>
+							<td></td>
+						</tr>
+						<tr>
+							<td class="firstColumn">销售价格（不含税）</td>
+							<td></td>
+							<td></td>
+						</tr>
+						<tr>
+							<td class="firstColumn">消端含税价格</td>
+							<td></td>
+							<td></td>
+						</tr>
+						<tr>
+							<td class="firstColumn">企业所得税</td>
+							<td></td>
+							<td></td>
+						</tr>
+						<tr>
+							<td class="firstColumn">企业利润</td>
+							<td></td>
+							<td></td>
+						</tr>
+						<tr>
+							<td class="firstColumn">企业利润率</td>
+							<td></td>
+							<td></td>
+						</tr>
+					</tbody>
+				</table>
+				<div>
+					<div>海南生产对比内地，企业利润率从
+						<span class="p" id="profit_rate_dalu">xxx%</span>增长至
+						<span class="p-red" id="profit_rate_hainan">bbb%</span>
+					</div>
+				</div>
+				<br><br>
+				<hr>
+				<!-- <div class="gaoguan" style="display: none;"> -->
+				<div class="gaoguan">
+					<div>高管个人所得税&nbsp;&nbsp;&nbsp;&nbsp;<span>    以企业年收入100万预估</span></div>
+					<table class="enterprise-table">
+						<thead>
+							<tr>
+								<th>项目</th>
+								<th>内地生产</th>
+								<th>海口生产</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td class="firstColumn">税前收入</td>
+								<td>1,000,000</td>
+								<td>1,000,000</td>
+							</tr>
+							<tr>
+								<td class="firstColumn">个人所得税</td>
+								<td>194.000</td>
+								<td>120,000</td>
+							</tr>
+							<tr>
+								<td class="firstColumn">税后收入</td>
+								<td>816,000</td>
+								<td>870,000</td>
+							</tr>
+						</tbody>
+					</table>
+					<div>海南生产对比内地，企业高管个人收入增长
+						<span class="p-red">9.06%</span>
+					</div>
+				</div>
+				<a href="javascript:;" id="reset_button" class="btn">重新计算</a>
+			</div>
+		</div>
+		<script src="js/compute.js"></script>
+		<script src="js/jisuan.js"></script>
+	</body>
+</html>
